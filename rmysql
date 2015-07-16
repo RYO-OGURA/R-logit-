@@ -1,0 +1,35 @@
+install.packages("RMySQL")
+library(RMySQL)
+
+###create a database connection object
+###mydb = dbConnect(MySQL(), user='user', password='password', dbname='database_name', host='host')
+credit = dbConnect(MySQL(), user = 'root', password ='          ', dbname = 'credit', host = 'localhost')
+
+## list the tables and fields in the database we connected to
+##dbListTables(mydb)
+dbListTables(credit)
+
+### a list of the tables in our connection
+##dbListFields(mydb, 'some_table')
+dbListFields(credit, 'result1')
+
+###Queries can be run using the dbSendQuery function.
+###dbSendQuery(mydb, 'drop table if exists some_table, some_other_table')
+result1999 = dbReadTable(credit, 'result1999')
+result2000 = dbReadTable(credit, 'result2000')
+result2001 = dbReadTable(credit, 'result2001')
+result2002 = dbReadTable(credit, 'result2002')
+result2003 = dbReadTable(credit, 'result2003')
+result2003 = dbReadTable(credit, 'result2003')
+result2003 = dbReadTable(credit, 'result2003')
+result2003 = dbReadTable(credit, 'result2003')
+result2003 = dbReadTable(credit, 'result2003')
+defaultsum1 = dbReadTable(credit, 'sum1999')
+defaultsum2 = dbReadTable(credit, 'sum2000')
+defaultsum3 = dbReadTable(credit, 'sum2001')
+defaultsum4 = dbReadTable(credit, 'sum2002')
+defaultsum5 = dbReadTable(credit, 'sum2003')
+
+summary(defaultsum1)
+###join data frames(datasets)vertically. adding rows.
+resultsbind = rbind(result1999,result2000,result2001,result2002,result2003)
