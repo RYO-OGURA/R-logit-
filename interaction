@@ -1,0 +1,40 @@
+```{r}
+##########interaction term logit
+
+interact2003<- data.frame(result2003$result,result2003$score,result2003$dti,result2003$ltv,result2003$i_rate)
+result<-result2003$result
+score<-result2003$score
+dti<-result2003$dti
+ltv<-result2003$ltv
+i_rate<-result2003$i_rate
+result2003$iscore<- result2003$score*result2003$idiffer
+result2003$idti<-na.omit((result2003$dti*result2003$idiffer)) 
+result2003$iltv<-(result2003$ltv*result2003$idiffer) 
+
+head(result2003)
+
+glm2003interact<-(glm(result~score+dti+ltv+idiffer+iscore+idti+iltv, data=result2003, family=binomial(link="logit")))
+summary(glm2003interact)
+
+interact2003<- data.frame(result,score,dti,ltv,i_rate,iscore,idti,iltv)
+
+###drop column
+result2003$i_rate<-NULL
+
+
+iscore<-format(interact2003$iscore, digits = 0)
+idti<-interact2003$idti
+iltv<-format(interact2003$ltv, digits = 0)
+
+head(interact2003)
+interact2003 = na.omit(interact2003)
+summary(interact2003)
+glmint2003<-glm(result~score+dti+ltv+i_rate+iscore+iltv, data=interact2003,family=binomial(link="logit"))
+summary()
+format(round(interact2003$iscore, 0), nsmall = 0)
+
+lot(defaultbind$m_period, defaultbind$n_default, xlab="year" , ylab="n_default")
+plot(defaultbind$m_period, defaultbind$score, xlab="year" , ylab="score", col = 'red')
+plot(defaultbind$m_period, defaultbind$dti, xlab="year" , ylab="debt to income ratio")
+
+```
